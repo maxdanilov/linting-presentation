@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-    <title>Groovy</title>
+    <title>Linting and Formatting</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
@@ -57,6 +57,10 @@
             font-size: 100px;
         }
 
+        .slide * + h2 {
+            margin-top: 6px !important;
+        }
+
         h3 {
             text-align: center;
             font-size: 48px;
@@ -72,85 +76,115 @@
         .strike {
             text-decoration: line-through;
         }
+
+        img.icon {
+            width: 22px;
+            padding-right: 8px;
+        }
+
+        .white {
+            color: #eeeeee !important;
+        }
     </style>
 </head>
 
 <body class="shower list">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-
     <section class="slide clear" id="cover">
-        <div class="place center" style="width: 85%;">
-            <h2>Introducing Code Styles:</h2>
-            <h2>Linting and Formatting</h2>
+        <img class="cover" src="images/background.png">
+        <div class="place center" style="width: 100%; background-color: rgba(0,0,0,0.5)">
+            <h2 class="white">Introducing Code Styles:</h2>
+            <h2 class="white">Linting and Formatting</h2>
         </div>
     </section>
 
     <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
         <h2>Objectives 🚀</h2>
         <ul>
             <li class="next">Common style guide across multiple projects;</a></li>
-            <li class="next">Improving code quality and reducing the bug occurence probability;</a></li>
-            <li class="next">Covering multiple languages (Groovy, Python, Terraform, YAML etc.);</li>
-            <li class="next">Eliminating the need for humans to check code formatting;</li>
+            <li class="next">Improving code quality and reducing the bug occurrence probability;</a></li>
+            <li class="next">Eliminating the need for humans to check for code formatting and basic bad practices;</li>
+            <li class="next">Covering multiple languages (Groovy, Python, Terraform, YAML, etc.);</li>
             <li class="next">Cross-platform setup, working the same way in CI and locally;</li>
             <li class="next">Happier engineers <!-- working on actual problems --> 🥳</li>
         </ul>
     </section>
 
     <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
         <h2>Tools 🛠</h2>
+
         <table>
+            <thead style="font-size: 24pt;">
+                <td><b>Language</b></td>
+                <td><b>Linter</b></td>
+                <td><b>Formatter</b></td>
+            </thead>
             <tr>
-                <td>
-                    <b>Linting</b>
-                    <ul>
-                        <li>Groovy: <a href="http://codenarc.sourceforge.net/">CodeNarc</a></li>
-                        <li>YAML: <a href="http://www.yamllint.com/">yamllint</a></li>
-                        <li>Kubernetes YAML: <a href="https://github.com/instrumenta/kubeval">kubeval</a>*</li>
-                        <li>Python: <a href="https://www.pylint.org/">pylint</a>*</li>
-                    </ul>
-                </td>
-                <td>
-                    <b>Autoformatting</b>
-                    <ul>
-                        <li>
-                            <li>Groovy: <a href="https://www.jetbrains.com/idea/">IntelliJ</a></li>
-                            <li>Pycharm: <a href="https://www.jetbrains.com/pycharm/">PyCharm</a>*</li>
-                            <li>Terraform: <a href="https://www.terraform.io/docs/commands/fmt.html">terraform fmt</a></li>
-                        </li>
-                    </ul>
-                </td>
+                <td><img src="images/groovy.svg" class="icon"><b>Groovy</b></td>
+                <td><a href="http://codenarc.sourceforge.net/" target="_blank">CodeNarc</a></td>
+                <td><a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ</a></td>
+            </tr>
+            <tr>
+                <td><img src="images/python.png" class="icon"><b>Python</b></td>
+                <td><a href="https://www.pylint.org/" target="_blank">pylint</a> *</td>
+                <td><a href="https://www.jetbrains.com/pycharm/" target="_blank">PyCharm</a> *</td>
+            </tr>
+            <tr>
+                <td><img src="images/bash.png" class="icon"><b>Shell</b></td>
+                <td><a href="https://github.com/koalaman/shellcheck" target="_blank">Shellcheck</a> *</td>
+                <td><a href="https://github.com/mvdan/sh">shfmt</a> / <a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ</a>? *</td></td>
+            </tr>
+            <tr>
+                <td><img src="images/terraform.png" class="icon"><b>Terraform</b></td>
+                <td>😞</td>
+                <td><a href="https://www.terraform.io/docs/commands/fmt.html" target="_blank">terraform fmt</a> </td>
+            </tr>
+            <tr>
+                <td><img src="images/yaml.png" class="icon"><b>YAML</b></td>
+                <td><a href="http://www.yamllint.com/" target="_blank">yamllint</a></td>
+                <td>😞</td>
+            </tr>
+            <tr>
+                <td><img src="images/k8s.png" class="icon"><b>YAML (k8s)</b></td>
+                <td><a href="https://github.com/instrumenta/kubeval" target="_blank">kubeval</a> *</td>
+                <td>😞</td>
             </tr>
         </table>
-        * - pending implementation
+        <i>* - pending implementation</i>
     </section>
 
     <section class="slide clear">
-        <h2>Running locally 👨‍💻</h2>
-        Example project: <a href="https://github.com/camunda-ci/jenkins-job-dsl-seed-jobs">jenkins-job-dsl-seed-jobs</a>
+        <img class="cover" src="images/background-top.png">
+        <h2>Running Locally 👨‍💻</h2>
+        <p>Example: <a href="https://github.com/camunda-ci/jenkins-job-dsl-seed-jobs" target="_blank">jenkins-job-dsl-seed-jobs</a></p>
 
-        <span class="next">
-            <h3>
-                <code>make lint</code>
-            </h3>
-            <h3>
+        <span>
+            <h3 class="next" style="margin-top: 24px !important;">
                 <code>make fmt</code>
             </h3>
+            <h3 class="next" style="margin-bottom: 24px !important; margin-top: 24px;">
+                <code>make lint</code>
+            </h3>
         </span>
+
+        <img src="images/docker.png" class="next place center bottom" style="width: 100px; padding-bottom: 45px;">
     </section>
 
     <section class="slide clear">
-        <h2>Running locally 👨‍💻</h2>
+        <img class="cover" src="images/background-top.png">
+        <h2>Makefile Example</h2>
         <pre>
         <code class="makefile">
-GROOVYLINT='docker.io/abletonag/groovylint:0.7.1'
+CODENARC='docker.io/abletonag/groovylint:0.7.1'
 
 .PHONY: lint
 lint:
     <mark class="warning">@docker</mark> run --rm -v `pwd`:/ws -u `id -u`:`id -g` \
-        $(GROOVYLINT) python3 /opt/run_codenarc.py -- \
+        $(CODENARC) python3 /opt/run_codenarc.py -- \
             -includes='**/Jenkinsfile,**/*.groovy,**/*.dsl' \
             -rulesetfiles=file\:ruleset.groovy
         </code>
@@ -158,14 +192,16 @@ lint:
     </section>
 
     <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
         <h2>Running in CI 🤖</h2>
         <div style="width: 100%" align="center">
-            <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;zoom&quot;:0.8,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;www.draw.io\&quot; modified=\&quot;2020-01-31T13:25:53.561Z\&quot; agent=\&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36\&quot; etag=\&quot;4hYsRoLtLicQYacOjruh\&quot; version=\&quot;12.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;HrT73jNdd7mTpuWtL63j\&quot; name=\&quot;Page-1\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
-    <script type="text/javascript" src="https://www.draw.io/js/viewer.min.js"></script>
+            <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;zoom&quot;:0.8,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;www.draw.io\&quot; modified=\&quot;2020-01-31T13:49:14.077Z\&quot; agent=\&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36\&quot; etag=\&quot;QdsqJoFv3xZzY1Waxuyu\&quot; version=\&quot;12.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;HrT73jNdd7mTpuWtL63j\&quot; name=\&quot;Page-1\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+            <script type="text/javascript" src="https://www.draw.io/js/viewer.min.js"></script>
         </div>
     </section>
 
     <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
         <h2>Running in CI 🤖</h2>
         <pre>
             <code><div>stage('Lint') {
@@ -181,15 +217,20 @@ lint:
         </pre>
     </section>
 
-
-
-
     <section class="slide clear">
-        <img class="place center" alt="CodeNarc" src="images/codenarc.png" style="width: 60%; top: 260px;">
+        <img class="cover" src="images/background-top.png">
+        <h2>Example</h2>
+        <div class="place center">
+            <a href="https://github.com/camunda-ci/jenkins-job-dsl-seed-jobs/pull/157" target="_blank">
+                <img src="images/error-formatting.png" width="700px" style="margin-top: 100px;"/>
+            </a>
+        </div>
     </section>
 
     <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
         <h2>CodeNarc 👮‍‍</h2>
+        <img class="" alt="CodeNarc" src="images/codenarc.png" style="width: 220px; top: 260px;">
         <blockquote style="margin-bottom: 15px;">
             <a target=_blank href="http://codenarc.sourceforge.net/">CodeNarc</a> analyzes Groovy code for defects, bad
             practices, inconsistencies, style issues and more.
@@ -198,51 +239,103 @@ lint:
         </blockquote>
 
         <ul class="next">
-            <li class="next"><a href="http://codenarc.sourceforge.net/codenarc-rule-index.html">380 rules</a></li>
-            <li class="next">20+ rules categories: design, convention, formatting, naming, security etc.
+            <li class="next"><a href="http://codenarc.sourceforge.net/codenarc-rule-index.html" target="_blank">380 rules</a> 🙀</li>
+            <li class="next">20+ rule categories: design, convention, formatting, naming, security etc.</li>
+            <li class="next">Congifured via <a href="https://github.com/camunda-ci/jenkins-job-dsl-seed-jobs/blob/master/ruleset.groovy" target="_blank">ruleset.groovy</a> in the root of a repo</li>
         </ul>
-
-
-
-<!--         <span class="next">
-            <img src="images/violations.png" class="place center bottom" style="margin-bottom: 70px;">
-            <p class="place center bottom" style="font-size: 16px; font-style: italic;">jenkins-job-dsl-seed-jobs, 11k
-                LOC</p>
-        </span> -->
     </section>
 
-<!--     <section class="slide clear">
-        <h2>Rules</h2>
-        <ul>
-            <li class="next"><a href="http://codenarc.sourceforge.net/codenarc-rule-index.html">380 rules</a></li>
-            <li class="next">20+ rules categories: design, convention, formatting, naming, security etc.
-        </ul>
-    </section> -->
 
-    <!-- <section class="slide clear">
-        <h2>What is it? 🤔</h2>
-        <ul>
-            <li class="next">Designed to be an extension of Java and native to JVM</li>
-            <li class="next">«Java + dynamic types + closures»</li>
-            <li class="next">75% Java, 12% Ruby, 8% Python, 5% black f<span
-                    style="background-color: black">-----</span>g magic and pain</li>
-            <li class="next">Very suitable for <a target=_blank
-                    href="http://docs.groovy-lang.org/docs/latest/html/documentation/core-domain-specific-languages.html">DSL</a>
-            </li>
-            <li class="next">Used for scripting & backend</li>
-            <li class="next">High development speed</li>
-            <li class="next">14<sup>th</sup> in <a target=_blank href="https://www.tiobe.com/tiobe-index/">TIOBE</a>
-                (Nov. 2019)</li>
-        </ul>
-    </section> -->
-
-
-    <section class="slide clear" style="background-color: black;">
-        <img src="images/arigator.jpg" alt="Thank you!" class="cover">
+    <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
+        <h2>CodeNarc 👮‍‍</h2>
+        <pre>
+            <code>make lint</code>
+        </pre>
+        <pre>
+            <code class="makefile">...
+INFO Scanned 613 files
+ERROR src/main/groovy/util/Versions.groovy:33:
+    <a href="https://www.google.com/search?q=codenarc+SpaceAfterOpeningBrace&rlz=1C5CHFA_enDE867DE867&oq=codenarc+SpaceAfterOpeningBrace&aqs=chrome..69i57.1138j0j7&sourceid=chrome&ie=UTF-8" target="_blank">SpaceAfterOpeningBrace</a>: [empty message]
+ERROR src/main/groovy/util/Versions.groovy:33:
+    SpaceBeforeClosingBrace: [empty message]
+ERROR Found 2 violation(s)
+make: *** [lint] Error 1</code>
+        </pre>
     </section>
 
     <section class="slide clear">
-        <h2 class="shout">Questions?</h2>
+        <img class="cover" src="images/background-top.png">
+        <h2>Future Ruleset Improvements</h2>
+        <ul class="next">
+            <li>Enable <a href="http://codenarc.sourceforge.net/codenarc-rules-basic.html" target="_blank">EmptyCatchBlock</a></li>
+            <pre><code class="java">def myMethod() {
+    try {
+        doSomething()
+    } catch(MyException e) { ❌
+    }
+}</code></pre>
+        </ul>
+    </section>
+
+    <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
+        <h2>Future Ruleset Improvements</h2>
+        <ul>
+            <li>Enable <a href="http://codenarc.sourceforge.net/codenarc-rules-convention.html" target="_blank">InvertedIfElse</a></li>
+            <pre><code class="java">if (!x) { ❌
+    return false
+} else {
+    return true
+}</code></pre>
+            <li class="next">Reduce limit for <a href="http://codenarc.sourceforge.net/codenarc-rules-formatting.html" target="_blank">LineLength</a> (currently 210)<f/li>
+            <li class="next">⚠️ Reduce limit for <a href="http://codenarc.sourceforge.net/codenarc-rules-size.html" target="_blank">CyclomaticComplexity</a> (currently 20)</li>
+        </ul>
+    </section>
+
+    <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
+        <h2>Future Ruleset Improvements</h2>
+        <ul>
+            <li>Enable <a href="http://codenarc.sourceforge.net/codenarc-rules-groovyism.html" target="_blank">ClosureAsLastMethodParameter</a>
+            <pre><code class="java">[1, 2, 3].each({ println it }) ❌
+[1, 2, 3].each { println it } ✅
+</code></pre></li>
+            <li class="next">Enable <a href="http://codenarc.sourceforge.net/codenarc-rules-unnecessary.html" target="_blank">UnnecessaryGString</a>
+                <pre><code class="java">def a = "key1" ❌
+def b = 'key1' ✅
+def c = "key${keyNum}" ✅
+</code></pre></li>
+        </ul>
+    </section>
+
+    <section class="slide clear">
+        <img class="cover" src="images/background-top.png">
+        <h2>Next Steps 📈</h2>
+        <ul class="next">
+            <li class="next">Add the rest of the linters/formatters to the most used projects:
+                <ul>
+                    <li><a href="https://github.com/camunda-internal/gcloud-infrastructure" target="_blank">gcloud-infrastructure</a></li>
+                    <li><a href="https://github.com/camunda-ci/jenkins-global-shared-library" target="_blank">jenkins-global-shared-library</a></li>
+                    <li><a href="https://github.com/cawemo/jenkins-shared-libs" target="_blank">cawemo/jenkins-shared-libs</a></li>
+                    <li><a href="https://github.com/cawemo/infrastructure" target="_blank">cawemo/infrastructure</a></li>
+                </ul>
+            <li class="next"><a href="https://pre-commit.com/" target="_blank">Pre-commit</a> hooks?</li>
+        </ul>
+    </section>
+
+    <section class="slide clear">
+        <img class="cover" src="images/background.png">
+        <div style="width: 100%; background-color: rgba(0,0,0,0.7)">
+            <img src="images/arigator3.png" class="cover" alt="Thank you!" width="550px;">
+        </div>
+    </section>
+
+    <section class="slide clear">
+        <img class="cover" src="images/background.png">
+        <div class="place center" style="width: 100%; background-color: rgba(0,0,0,0.5)">
+            <h2 class="white" style="font-size: 100px;">Questions?</h2>
+        </div>
     </section>
 
     <script src="shower/shower.min.js"></script>
